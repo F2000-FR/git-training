@@ -1,0 +1,35 @@
+#!/usr/bin/php
+<?php
+
+// repo root path
+$sRootPath = exec('git rev-parse --show-toplevel', $res, $ret);
+if ($ret) {
+	exit(0);
+}
+
+// get list of files
+exec('git diff --cached --name-only --diff-filter=ACMR', $aFiles);
+if (!is_array($aFiles)) {
+	exit(0);
+}
+
+// process all PHP files
+$aErrors = [];
+foreach ($aFiles as $sFile) {
+	if (substr($sFile, -4) == '.php') {
+		// check PHP file syntax
+		exec('cat '. $sRootPath.'/'.$sFile .' | php -l', $aErrors);
+	}
+}
+
+// display errors
+$iReturn = 0;
+if (!empty($aErrors) && $aErrors[0] !== 'No syntax errors detected in Standard input code') {
+	echo '=== ERRORS ===';
+	foreach ($aErrors as $sErr) {
+		echo $sErr . PHP_EOL;
+	}
+	$iReturn = 1;
+	echo '>> Commit annulé' . PHP_EOL;
+}
+exit($iReturn);

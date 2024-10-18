@@ -24,12 +24,12 @@ foreach ($aFiles as $sFile) {
 
 // display errors
 $iReturn = 0;
-if (!empty($aErrors) && $aErrors[0] !== 'No syntax errors detected in Standard input code') {
+if ($aErrors && (count($aErrors) > 1 || ($aErrors[0] !== 'No syntax errors detected in Standard input code'))) {
 	echo '=== ERRORS ===';
 	foreach ($aErrors as $sErr) {
 		echo $sErr . PHP_EOL;
 	}
 	$iReturn = 1;
-	echo '>> Commit annulÈ' . PHP_EOL;
+	echo '>> Commit annul√©' . PHP_EOL;
 }
 exit($iReturn);

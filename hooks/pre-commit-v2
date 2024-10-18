@@ -33,7 +33,7 @@ foreach ($aFiles as $sFile) {
 
 // display errors
 $iReturn = 0;
-if (count($aErrors) > 1 || ($aErrors[0] !== 'No syntax errors detected in Standard input code')) {
+if ($aErrors && (count($aErrors) > 1 || ($aErrors[0] !== 'No syntax errors detected in Standard input code'))) {
 	echo '=== ERRORS ==='.PHP_EOL;
 	foreach ($aErrors as $sErr) {
 		echo $sErr . PHP_EOL;

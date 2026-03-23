@@ -1,0 +1,14 @@
+# Fichiers temporaires (cache, logs, librairies tierces)
+logs/
+cache/
+vendor/
+
+# PHPStorm
+.idea/
+
+# Visual Studio Code
+.vscode/
+
+# PHPUnit
+.phpunit.cache/
+.phpunit.result.cache
